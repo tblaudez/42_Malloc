@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 18:49:36 by tblaudez          #+#    #+#             */
-/*   Updated: 2020/07/07 11:51:03 by tblaudez         ###   ########.fr       */
+/*   Created: 2020/07/08 13:40:24 by tblaudez          #+#    #+#             */
+/*   Updated: 2020/07/08 13:44:00 by tblaudez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Apply `f()` to each link of a list
-** @param: (t_list *link) - A pointer to the first link of a list
-** @param: (void (*f)(t_list *elem)) - The address of the function to apply to each link of the list
-*/
-
-void	ft_lstiter(t_list *link, void (*f)(t_list *elem))
+char    *ft_strncpy(char *dst, char *src, size_t len)
 {
-	if (link == NULL)
-		return;
-	f(link);
-	ft_lstiter(link->next, f);
+    while (*src && len)
+    {
+        *dst = *src;
+        dst++;
+        src++;
+        len--;
+    }
+    while (len--)
+        *dst = '\0';
+    return (dst);
 }
