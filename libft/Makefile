@@ -6,14 +6,12 @@
 #    By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 17:45:13 by tblaudez          #+#    #+#              #
-#    Updated: 2020/07/08 14:37:39 by tblaudez         ###   ########.fr        #
+#    Updated: 2020/07/13 18:18:27 by tblaudez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= libft.a
-SRC= src/ft_memalloc.c src/ft_memcpy.c src/ft_memset.c src/ft_putchar.c \
-src/ft_putendl.c src/ft_putnbr.c src/ft_putstr.c src/ft_strcmp.c \
-src/ft_strcpy.c src/ft_strjoin.c src/ft_strlen.c src/ft_strncpy.c
+SRC= src/ft_digitcount.c src/ft_itoabase.c src/ft_memalloc.c src/ft_memcpy.c src/ft_memset.c src/ft_printf/ft_printf.c src/ft_putchar.c src/ft_putendl.c src/ft_putnbr.c src/ft_putstr.c src/ft_strcmp.c src/ft_strcpy.c src/ft_strdup.c src/ft_strjoinfree.c src/ft_strlen.c src/ft_strncmp.c src/ft_strncpy.c src/ft_strndup.c src/ft_strnew.c src/ft_strnjoinfree.c src/ft_strreplace.c src/ft_strreplaceone.c src/ft_strstr.c
 OBJ= $(SRC:%.c=%.o)
 CFLAGS= -Wall -Wextra -Werror -I include/ -g3
 

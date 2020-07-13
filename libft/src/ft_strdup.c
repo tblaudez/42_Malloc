@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 13:45:12 by tblaudez          #+#    #+#             */
-/*   Updated: 2020/07/13 11:33:06 by tblaudez         ###   ########.fr       */
+/*   Created: 2020/07/13 10:11:09 by tblaudez          #+#    #+#             */
+/*   Updated: 2020/07/13 17:54:22 by tblaudez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+char    *ft_strdup(const char *s1)
 {
-    int i;
+    char    *str;
 
-    i = 0;
-    while (s1[i] && s2[i] && s1[i] == s2[i])
-    {
-        i++;
-    }
-    return (s1[i] - s2[i]);
+    if (!(str = ft_strnew(ft_strlen(s1))))
+        return NULL;
+    ft_strcpy(str, s1);
+    return (str);
 }

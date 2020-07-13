@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 13:45:12 by tblaudez          #+#    #+#             */
-/*   Updated: 2020/07/13 11:33:06 by tblaudez         ###   ########.fr       */
+/*   Created: 2020/07/13 10:02:35 by tblaudez          #+#    #+#             */
+/*   Updated: 2020/07/13 12:15:14 by tblaudez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int ft_strncmp(const char *s1, const char *s2, size_t len)
 {
     int i;
 
     i = 0;
-    while (s1[i] && s2[i] && s1[i] == s2[i])
+    while (s1[i] && s2[i] && s1[i] == s2[i] && --len)
     {
         i++;
     }
