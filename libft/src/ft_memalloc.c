@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 17:55:02 by tblaudez          #+#    #+#             */
-/*   Updated: 2020/07/13 17:57:24 by tblaudez         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_memalloc.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/07/06 17:55:02 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/14 12:05:34 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 /*
@@ -25,6 +26,5 @@ void	*ft_memalloc(size_t size)
 	if (!(ptr = malloc(size)))
 		return (NULL);
 	ft_memset(ptr, 0, size);
-
 	return (ptr);
 }

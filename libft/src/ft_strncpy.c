@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 13:40:24 by tblaudez          #+#    #+#             */
-/*   Updated: 2020/07/13 11:37:00 by tblaudez         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strncpy.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/07/08 13:40:24 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/14 12:09:52 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strncpy(char *dst, const char *src, size_t len)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (src[i] && len)
-    {
-        dst[i] = src[i];
-        i++;
-        len--;
-    }
-    while (len--)
-        dst[i] = '\0';
-    return (dst);
+	i = 0;
+	while (src[i] && len)
+	{
+		dst[i] = src[i];
+		i++;
+		len--;
+	}
+	while (len--)
+		dst[i] = '\0';
+	return (dst);
 }

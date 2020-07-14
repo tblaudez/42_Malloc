@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/07/06 16:41:00 by tblaudez          #+#    #+#              #
-#    Updated: 2020/07/07 18:36:00 by tblaudez         ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
+#                                                    +#+                       #
+#    Created: 2020/07/06 16:41:00 by tblaudez      #+#    #+#                  #
+#    Updated: 2020/07/14 14:56:47 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ endif
 
 NAME= libft_malloc_$(HOSTTYPE).so
 LINKNAME= libft_malloc.so
-SRC= src/zones.c src/utils.c src/malloc.c src/free.c src/realloc.c
+SRC= src/blocks.c src/free.c src/get_zone_size.c src/is_size.c src/malloc.c\
+src/realloc.c src/show_alloc_mem.c src/zones.c
 OBJ= $(SRC:%.c=%.o)
 CFLAGS= -Wall -Wextra -Werror -I include/ -I libft/include -g3
 LIBFT= libft/libft.a
@@ -28,10 +29,9 @@ $(LIBFT):
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(LIBFT) -fPIC -shared $(OBJ) -o $(NAME)
-	if [ ! -f "$(LINKNAME)" ]; then \
-		ln -s $(NAME) $(LINKNAME); \
+	if [ ! -f "$(LINKNAME)" ]; then\
+		ln -s $(NAME) $(LINKNAME);\
 	fi;
-	$(CC) $(CFLAGS) $(NAME) $(LIBFT) src/main.c -o malloc
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

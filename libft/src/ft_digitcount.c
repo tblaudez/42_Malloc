@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_digitcount.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tblaudez <tblaudez@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 17:05:28 by tblaudez          #+#    #+#             */
-/*   Updated: 2020/07/13 18:08:57 by tblaudez         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_digitcount.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/07/14 11:57:24 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/14 12:02:02 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ int	ft_digitcount(int nbr, const int base)
 
 	if (nbr == 0)
 		return (1);
-	
 	digits = 0;
 	while (nbr)
 	{
 		nbr /= base;
 		digits++;
 	}
-
 	return (digits);
 }

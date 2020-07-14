@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstr.c                                        :+:    :+:            */
+/*   is_size.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/07 18:52:29 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:06:45 by tblaudez      ########   odam.nl         */
+/*   Created: 2020/07/14 12:35:39 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/14 12:57:45 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libft.h"
+#include <stdbool.h>
+#include "malloc.h"
 
-void	ft_putstr(char const *s)
+bool	is_tiny(size_t size)
 {
-	write(1, s, ft_strlen(s));
+	return (size <= TINY_SIZE);
+}
+
+bool	is_small(size_t size)
+{
+	return (size > TINY_SIZE && size <= SMALL_SIZE);
+}
+
+bool	is_large(size_t size)
+{
+	return (size > SMALL_SIZE);
 }

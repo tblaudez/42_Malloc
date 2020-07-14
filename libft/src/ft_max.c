@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstr.c                                        :+:    :+:            */
+/*   ft_max.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/07 18:52:29 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:06:45 by tblaudez      ########   odam.nl         */
+/*   Created: 2020/07/14 12:22:28 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/14 12:24:18 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+int	ft_max(int a, int b)
 {
-	write(1, s, ft_strlen(s));
+	return (a >= b ? a : b);
 }
