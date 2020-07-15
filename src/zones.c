@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 14:42:01 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 13:40:31 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/15 14:35:42 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,41 @@ static t_zone	*initialize_zone(t_zone *zone, size_t size\
 	return (zone);
 }
 
+#include <unistd.h>
 t_zone			*create_new_zone(size_t size, const enum e_kind kind)
 {
 	t_zone	*new;
+	ft_putstr("MMAP - ");
+	if (kind == TINY)
+	{
+		ft_putstr("TINY - ");
+		ft_putnbr(get_tiny_zone_size() / getpagesize());
+		ft_putstr(" pages - ");
+		ft_putnbr(size);
+		ft_putendl(" bytes");
+	}
+	else if (kind == SMALL)
+	{
+		ft_putstr("SMALL - ");
+		ft_putnbr(get_small_zone_size() / getpagesize());
+		ft_putstr(" pages - ");
+		ft_putnbr(size);
+		ft_putendl(" bytes");
+	}
+	else
+		{
+		ft_putstr("LARGE - ");
+		ft_putnbr(get_large_zone_size(size) / getpagesize());
+		ft_putstr(" pages - ");
+		ft_putnbr(size);
+		ft_putendl(" bytes");
+	}
 
+	
+	
+	
+	
+	
 	if (kind == TINY)
 		new = mmap(NULL, get_tiny_zone_size(), PROT_READ | PROT_WRITE\
 		, MAP_ANON | MAP_PRIVATE, -1, 0);
@@ -60,7 +91,7 @@ t_zone			*create_new_zone(size_t size, const enum e_kind kind)
 	return (initialize_zone(new, size, kind));
 }
 
-void			delete_zone(t_zone *zone)
+void			remove_zone_from_list(t_zone *zone)
 {
 	t_zone *tmp;
 

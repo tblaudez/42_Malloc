@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 11:42:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:16:14 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/15 11:25:00 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include "libft.h"
 
-static int	ft_udigitcount(size_t nbr, const int base)
+static int	ft_udigitcount(uintmax_t nbr, int base)
 {
 	int	digits;
 
@@ -30,7 +30,7 @@ static int	ft_udigitcount(size_t nbr, const int base)
 	return (digits);
 }
 
-static char	*ft_uitoabase(size_t value, const int base)
+static char	*ft_uitoabase(uintmax_t value, int base)
 {
 	char	*str;
 	int		digits_count;
@@ -46,36 +46,39 @@ static char	*ft_uitoabase(size_t value, const int base)
 	return (str);
 }
 
-void		get_pointer(va_list ap, char **output, const char *formating)
+void		get_pointer(va_list ap, char **output, const char *format_code)
 {
 	char	*value;
 	char	*tmp;
 
-	value = ft_strjoinfree("0x", ft_uitoabase(va_arg(ap, size_t), 16), FREE_R);
-	tmp = (*output);
-	(*output) = ft_strreplaceone(*output, formating, value);
-	free(tmp);
+	value = ft_strjoinfree("0x", ft_uitoabase(va_arg(ap, uintptr_t), 16), FREE_R);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	free(value);
+	(*output) = tmp;
 }
 
-void		get_unsigned(va_list ap, char **output, const char *formating)
+void		get_unsigned(va_list ap, char **output, const char *format_code)
 {
 	char	*value;
 	char	*tmp;
 
 	value = ft_uitoabase(va_arg(ap, uint32_t), 10);
-	tmp = (*output);
-	(*output) = ft_strreplaceone(*output, formating, value);
-	free(tmp);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	free(value);
+	(*output) = tmp;
 }
 
-void		get_hexa(va_list ap, char **output, const char *formating)
+void		get_hexa(va_list ap, char **output, const char *format_code)
 {
 	char	*value;
 	char	*tmp;
 
 	value = ft_strjoinfree("0x"\
 	, ft_uitoabase(va_arg(ap, uint32_t), 16), FREE_R);
-	tmp = (*output);
-	(*output) = ft_strreplaceone(*output, formating, value);
-	free(tmp);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	free(value);
+	(*output) = tmp;
 }

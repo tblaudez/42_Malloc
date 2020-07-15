@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 11:41:32 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:15:43 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/15 11:28:00 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,38 @@
 #include <stdarg.h>
 #include "libft.h"
 
-void	get_string(va_list ap, char **output, const char *formating)
+void	get_string(va_list ap, char **output, const char *format_code)
 {
 	char	*value;
 	char	*tmp;
 
 	value = va_arg(ap, char*);
-	tmp = (*output);
-	(*output) = ft_strreplaceone(*output, formating, value);
-	free(tmp);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	(*output) = tmp;
 }
 
-void	get_char(va_list ap, char **output, const char *formating)
+void	get_char(va_list ap, char **output, const char *format_code)
 {
-	char	value;
+	char	*value;
 	char	*tmp;
-	char	*tmp2;
 
-	value = (char)va_arg(ap, int);
-	tmp2 = ft_strndup(&value, 1);
-	tmp = (*output);
-	(*output) = ft_strreplaceone(*output, formating, tmp2);
-	free(tmp);
-	free(tmp2);
+	value = ft_strnew(1);
+	(*value) = (char)va_arg(ap, int);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	free(value);
+	(*output) = tmp;
 }
 
-void	get_decimal(va_list ap, char **output, const char *formating)
+void	get_decimal(va_list ap, char **output, const char *format_code)
 {
 	char	*value;
 	char	*tmp;
 
 	value = ft_itoabase(va_arg(ap, int), 10);
-	tmp = (*output);
-	(*output) = ft_strreplaceone(*output, formating, value);
-	free(tmp);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	free(value);
+	(*output) = tmp;
 }

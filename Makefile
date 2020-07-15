@@ -6,7 +6,7 @@
 #    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/06 16:41:00 by tblaudez      #+#    #+#                  #
-#    Updated: 2020/07/14 14:56:47 by tblaudez      ########   odam.nl          #
+#    Updated: 2020/07/15 12:31:20 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ LINKNAME= libft_malloc.so
 SRC= src/blocks.c src/free.c src/get_zone_size.c src/is_size.c src/malloc.c\
 src/realloc.c src/show_alloc_mem.c src/zones.c
 OBJ= $(SRC:%.c=%.o)
-CFLAGS= -Wall -Wextra -Werror -I include/ -I libft/include -g3
+CFLAGS= -Wall -Wextra -Werror
+INCLUDES= -I include/ -I libft/include
 LIBFT= libft/libft.a
 
 all: $(LIBFT) $(NAME)
@@ -28,13 +29,10 @@ $(LIBFT):
 	make -C libft/
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(LIBFT) -fPIC -shared $(OBJ) -o $(NAME)
-	if [ ! -f "$(LINKNAME)" ]; then\
-		ln -s $(NAME) $(LINKNAME);\
-	fi;
-
+	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -shared -L libft/ -l ft $(OBJ) -o $(NAME)
+	ln -sf $(NAME) $(LINKNAME);
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	/bin/rm -f $(OBJ)

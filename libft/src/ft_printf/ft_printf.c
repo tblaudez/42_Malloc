@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 19:31:21 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:15:05 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/15 11:35:58 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,28 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static void	add_format(va_list ap, char *format, char **output)
+static void	add_format(va_list ap, char **format, char **output)
 {
 	int			i;
-	const char	*formating[6] = {"%s", "%c", "%d", "%p", "%x", "%u"};
+	const char	*format_codes[6] = {"%s", "%c", "%d", "%p", "%x", "%u"};
 	void		(*const format_functions[6])(va_list ap, char **output\
-	, const char *formating) = {&get_string, &get_char, &get_decimal,\
+	, const char *format_codes) = {&get_string, &get_char, &get_decimal,\
 	&get_pointer, &get_hexa, &get_unsigned};
 
 	i = 0;
 	while (i < 6)
 	{
-		if (!ft_strncmp(format, formating[i], 2))
+		if (!ft_strncmp(*format, format_codes[i], ft_strlen(format_codes[i])))
 		{
-			format_functions[i](ap, output, formating[i]);
+			format_functions[i](ap, output, format_codes[i]);
+			(*format) += ft_strlen(format_codes[i]);
 			return ;
 		}
 		i++;
 	}
 }
 
-static void	add_color(char *format, char **output)
+static void	add_color(char **format, char **output)
 {
 	int			i;
 	char		*tmp;
@@ -48,12 +49,12 @@ static void	add_color(char *format, char **output)
 	i = 0;
 	while (i < 14)
 	{
-		if (!ft_strncmp(format, color_code[i][0], ft_strlen(color_code[i][0])))
+		if (!ft_strncmp(*format, color_code[i][0], ft_strlen(color_code[i][0])))
 		{
-			tmp = (*output);
-			(*output) = ft_strreplaceone(*output, color_code[i][0]\
-			, color_code[i][1]);
-			free(tmp);
+			tmp = ft_strreplaceone(*output, color_code[i][0], color_code[i][1]);
+			free(*output);
+			(*output) = tmp;
+			(*format) += ft_strlen(color_code[i][0]);
 			return ;
 		}
 		i++;
@@ -70,10 +71,11 @@ void		ft_printf(char *format, ...)
 	while (*format)
 	{
 		if (*format == '{')
-			add_color(format, &output);
+			add_color(&format, &output);
 		else if (*format == '%')
-			add_format(ap, format, &output);
-		format++;
+			add_format(ap, &format, &output);
+		else
+			format++;
 	}
 	ft_putstr(output);
 	va_end(ap);
