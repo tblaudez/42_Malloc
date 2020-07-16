@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 12:37:13 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 11:01:28 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/16 14:45:27 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ void		*malloc(size_t size)
 	else
 		return ((block = NULL));
 	block->free = false;
-	block->size = size;
 	return (block->ptr);
 }

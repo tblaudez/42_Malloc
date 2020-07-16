@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:05:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 10:57:46 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/16 15:04:08 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "libft.h"
 
 # define ALLOCATION_PER_ZONE	128
-# define TINY_SIZE				2048
-# define SMALL_SIZE				4096
+# define TINY_SIZE				4096
+# define SMALL_SIZE				8192
 
 enum	e_kind {
 	TINY, SMALL, LARGE
@@ -29,13 +29,14 @@ struct							s_block
 	void						*ptr;
 	char						free;
 	size_t						size;
+	size_t						_large_real_size;
 	struct s_block				*next;
 } __attribute__((aligned(16)));
 typedef struct s_block			t_block;
 
 struct							s_zone
 {
-	t_block						*blocks;
+	t_block						*block;
 	size_t						size;
 	enum e_kind					kind;
 	struct s_zone				*next;
@@ -93,7 +94,5 @@ void							show_alloc_mem(void);
 */
 t_zone							*create_new_zone(size_t size\
 , const enum e_kind kind);
-void							append_new_zone(t_zone *new);
-void							remove_zone_from_list(t_zone *zone);
 
 #endif

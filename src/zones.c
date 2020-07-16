@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 14:42:01 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 11:01:36 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/16 15:01:40 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,63 +24,52 @@ static size_t	get_zone_size(size_t size, const enum e_kind kind)
 		return (get_large_zone_size(size));
 }
 
-static t_zone	*initialize_zone(t_zone *zone, size_t size\
+static void		initialize_zone(t_zone *zone, size_t size\
 , const enum e_kind kind)
 {
 	zone->kind = kind;
 	zone->next = NULL;
 	zone->size = get_zone_size(size, kind);
-	zone->blocks = (t_block*)((char*)zone + sizeof(t_zone));
-	if (zone->kind == LARGE)
-	{
-		zone->blocks->free = true;
-		zone->blocks->ptr = (void*)((char*)zone->blocks + sizeof(t_block));
-		zone->blocks->next = NULL;
-	}
-	else if (zone->kind == SMALL)
-		initialize_block(zone->blocks, SMALL_SIZE);
-	else if (zone->kind == TINY)
-		initialize_block(zone->blocks, TINY_SIZE);
-	return (zone);
+	zone->block = (t_block*)((char*)zone + sizeof(t_zone));
+	zone->block->ptr = (void*)((char*)zone->block + sizeof(t_block));
+	zone->block->size = zone->size - (sizeof(t_zone) + sizeof(t_block));
+	zone->block->free = true;
+	zone->block->next = NULL;
 }
 
-t_zone			*create_new_zone(size_t size, const enum e_kind kind)
-{
-	t_zone	*new;
-	
-	if (kind == TINY)
-		new = mmap(NULL, get_tiny_zone_size(), PROT_READ | PROT_WRITE\
-		, MAP_ANON | MAP_PRIVATE, -1, 0);
-	else if (kind == SMALL)
-		new = mmap(NULL, get_small_zone_size(), PROT_READ | PROT_WRITE\
-		, MAP_ANON | MAP_PRIVATE, -1, 0);
-	else
-		new = mmap(NULL, get_large_zone_size(size), PROT_READ | PROT_WRITE\
-		, MAP_ANON | MAP_PRIVATE, -1, 0);
-	return (initialize_zone(new, size, kind));
-}
-
-void			remove_zone_from_list(t_zone *zone)
-{
-	t_zone *tmp;
-
-	if (zone == g_malloc)
-	{
-		g_malloc = zone->next;
-		return ;
-	}
-	tmp = g_malloc;
-	while (tmp->next != zone)
-		tmp = tmp->next;
-	tmp->next = zone->next;
-}
-
-void			append_new_zone(t_zone *new)
+static void		append_new_zone(t_zone *new)
 {
 	t_zone	*zone;
 
+	if (g_malloc == NULL)
+	{
+		g_malloc = new;
+		return ;
+	}
 	zone = g_malloc;
 	while (zone->next)
 		zone = zone->next;
 	zone->next = new;
 }
+
+t_zone			*create_new_zone(size_t size, const enum e_kind kind)
+{
+	t_zone	*zone;
+	
+	if (kind == TINY)
+		zone = mmap(NULL, get_tiny_zone_size(), PROT_READ | PROT_WRITE\
+		, MAP_ANON | MAP_PRIVATE, -1, 0);
+	else if (kind == SMALL)
+		zone = mmap(NULL, get_small_zone_size(), PROT_READ | PROT_WRITE\
+		, MAP_ANON | MAP_PRIVATE, -1, 0);
+	else
+		zone = mmap(NULL, get_large_zone_size(size), PROT_READ | PROT_WRITE\
+		, MAP_ANON | MAP_PRIVATE, -1, 0);
+	initialize_zone(zone, size, kind);
+	append_new_zone(zone);
+	return (zone);
+}
+
+
+
+

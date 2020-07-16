@@ -6,7 +6,7 @@
 #    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/06 17:45:13 by tblaudez      #+#    #+#                  #
-#    Updated: 2020/07/15 13:20:41 by tblaudez      ########   odam.nl          #
+#    Updated: 2020/07/16 14:03:34 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,16 @@ src/ft_strnew.c src/ft_strnjoinfree.c src/ft_strreplace.c \
 src/ft_strreplaceone.c src/ft_strstr.c
 OBJ= $(SRC:%.c=%.o)
 CFLAGS= -Wall -Wextra -Werror
-INCLUDES= -I include/
+INCLUDE_FILE= include/libft.h
+INCLUDE_DIR= -I include/
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INCLUDE_FILE)
 	ar rs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 
 clean:
 	/bin/rm -f $(OBJ)

@@ -6,7 +6,7 @@
 #    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/06 16:41:00 by tblaudez      #+#    #+#                  #
-#    Updated: 2020/07/16 10:28:48 by tblaudez      ########   odam.nl          #
+#    Updated: 2020/07/16 14:19:30 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC= src/blocks.c src/free.c src/get_zone_size.c src/is_size.c src/malloc.c\
 src/realloc.c src/show_alloc_mem.c src/zones.c
 OBJ= $(SRC:%.c=%.o)
 CFLAGS= -Wall -Wextra -Werror
-INCLUDES= -I include/ -I libft/include
+INCLUDE_FILE= include/malloc.h
+INCLUDE_DIR= -I include/ -I libft/include
 LIBFT= libft/libft.a
 
 all: $(LIBFT) $(NAME)
@@ -28,11 +29,11 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	make -C libft/
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDES) -fPIC -shared -L libft/ -l ft $(OBJ) -o $(NAME)
+$(NAME): $(OBJ) $(INCLUDE_FILE)
+	$(CC) $(CFLAGS) $(INCLUDE_DIR) -fPIC -shared -L libft/ -l ft $(OBJ) -o $(NAME)
 	ln -sf $(NAME) $(LINKNAME);
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 
 clean:
 	/bin/rm -f $(OBJ)

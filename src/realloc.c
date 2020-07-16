@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 18:10:43 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 14:45:35 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/16 14:41:26 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	*realloc(void *ptr, size_t size)
 		return (malloc(1));
 	}
 	find_block_by_ptr(&zone, &block, ptr);
-	if ((zone->kind == TINY && size <= TINY_SIZE)\
-	|| (zone->kind == SMALL && size <= SMALL_SIZE)\
-	|| (zone->kind == LARGE && size <=\
-	(zone->size - (sizeof(t_block) + sizeof(t_zone)))))
-		return (ptr);
+	if (block == NULL)
+		return (NULL);
 	new_ptr = malloc(size);
 	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
