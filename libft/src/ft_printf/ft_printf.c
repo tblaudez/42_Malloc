@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 19:31:21 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/15 11:35:58 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/16 10:10:05 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ void		ft_printf(char *format, ...)
 			format++;
 	}
 	ft_putstr(output);
+	free(output);
 	va_end(ap);
 }
