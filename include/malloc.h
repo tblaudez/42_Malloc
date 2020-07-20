@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:05:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 15:04:08 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/20 13:52:29 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 # define SMALL_SIZE				8192
 
 enum	e_kind {
-	TINY, SMALL, LARGE
+	TINY, SMALL, LARGE, INVALID
 };
 
 struct							s_block
 {
 	void						*ptr;
 	char						free;
-	size_t						size;
-	size_t						_large_real_size;
+	size_t						alloc_size;
+	size_t						true_size;
 	struct s_block				*next;
 } __attribute__((aligned(16)));
 typedef struct s_block			t_block;
@@ -63,8 +63,8 @@ void							free(void *ptr);
 /*
 **	get_zone_size.c
 */
-size_t							get_tiny_zone_size(void);
-size_t							get_small_zone_size(void);
+size_t							get_tiny_zone_size(size_t size);
+size_t							get_small_zone_size(size_t size);
 size_t							get_large_zone_size(size_t size);
 
 /*

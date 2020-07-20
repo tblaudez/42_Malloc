@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 12:37:13 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 14:45:27 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/20 13:57:16 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 
 t_zone		*g_malloc = NULL;
 
-void		*malloc(size_t size)
+static enum e_kind	get_kind(size_t alloc_size)
 {
-	t_block	*block;
+	if (is_tiny(alloc_size))
+		return (TINY);
+	else if (is_small(alloc_size))
+		return (SMALL);
+	else if (is_large(alloc_size))
+		return (LARGE);
+	return (INVALID);
+}
+#include <stdint.h>
+void				*malloc(size_t size)
+{
+	const enum e_kind	kind = get_kind(size);
+	t_block				*block;
 
-	if (is_tiny(size))
-		block = get_suitable_block(size, TINY);
-	else if (is_small(size))
-		block = get_suitable_block(size, SMALL);
-	else if (is_large(size))
-		block = get_suitable_block(size, LARGE);
-	else
-		return ((block = NULL));
+	if (kind == INVALID)
+		return (NULL);
+	block = get_suitable_block(size, kind);
 	block->free = false;
 	return (block->ptr);
 }

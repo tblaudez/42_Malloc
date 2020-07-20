@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 18:46:53 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 15:05:59 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/20 13:45:43 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static void	show_zone(enum e_kind kind, const char *to_string, size_t *total_siz
 		{
 			if (block->free == false)
 			{
-				block_end = (zone->kind == LARGE ? (void*)((char*)zone + zone->size) : (void*)block->next);
-				print_block_info(block->ptr, block, (zone->kind == LARGE ? block->_large_real_size : block->size));
-				(*total_size) += block->size;
+				block_end = (void*)((char*)block->ptr + block->alloc_size);
+				print_block_info(block->ptr, block_end, block->alloc_size);
+				(*total_size) += block->alloc_size;
 			}
 			block = block->next;
 		}
