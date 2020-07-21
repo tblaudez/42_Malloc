@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:05:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/20 13:52:29 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/21 14:44:40 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,36 @@
 # define MALLOC_H
 
 # include <stdbool.h>
-# include "libft.h"
+# include <stdint.h>
+# include <stddef.h>
 
-# define ALLOCATION_PER_ZONE	128
-# define TINY_SIZE				4096
-# define SMALL_SIZE				8192
+# define ALLOCATION_PER_ZONE	112
+# define TINY_MAX				512
+# define SMALL_MAX				10240
 
+typedef enum e_kind				t_kind;
 enum	e_kind {
 	TINY, SMALL, LARGE, INVALID
 };
 
+typedef struct s_block			t_block;
 struct							s_block
 {
 	void						*ptr;
-	char						free;
-	size_t						alloc_size;
-	size_t						true_size;
-	struct s_block				*next;
+	unsigned					free:1;
+	uint32_t					alloc_size;
+	uint32_t					true_size;
+	t_block						*next;
 } __attribute__((aligned(16)));
-typedef struct s_block			t_block;
 
+typedef struct s_zone			t_zone;
 struct							s_zone
 {
+	t_kind						kind;
+	uint32_t					size;
 	t_block						*block;
-	size_t						size;
-	enum e_kind					kind;
-	struct s_zone				*next;
+	t_zone						*next;
 } __attribute__((aligned(16)));
-typedef struct s_zone			t_zone;
 
 extern t_zone					*g_malloc;
 
@@ -49,7 +51,7 @@ extern t_zone					*g_malloc;
 **	blocks.c
 */
 t_block							*get_suitable_block(size_t size\
-, const enum e_kind kind);
+, const t_kind kind);
 void							find_block_by_ptr(t_zone **zptr\
 , t_block **bptr, void *ptr);
 void							initialize_block(t_block *block\
@@ -93,6 +95,6 @@ void							show_alloc_mem(void);
 **	zones.c
 */
 t_zone							*create_new_zone(size_t size\
-, const enum e_kind kind);
+, const t_kind kind);
 
 #endif
