@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:05:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/21 14:44:40 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/22 14:58:09 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,20 @@ void							*malloc(size_t size);
 void							*realloc(void *ptr, size_t size);
 
 /*
-**	show_alloc_mem.c
-*/
-void							show_alloc_mem(void);
-
-/*
 **	zones.c
 */
 t_zone							*create_new_zone(size_t size\
 , const t_kind kind);
+
+/*
+**	show_alloc_mem.c
+*/
+void							show_alloc_mem(void);
+t_zone							*get_next_similar_zone(t_kind kind);
+
+/*
+**	show_alloc_mem_hex.c
+*/
+void							show_alloc_mem_hex(void);
 
 #endif

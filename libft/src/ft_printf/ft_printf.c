@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 19:31:21 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 10:10:05 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/22 14:43:26 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 static void	add_format(va_list ap, char **format, char **output)
 {
 	int			i;
-	const char	*format_codes[6] = {"%s", "%c", "%d", "%p", "%x", "%u"};
-	void		(*const format_functions[6])(va_list ap, char **output\
+	const char	*format_codes[8] = {"%s", "%c", "%d", "%p", "%P", "%x", "%X", "%u"};
+	void		(*const format_functions[8])(va_list ap, char **output\
 	, const char *format_codes) = {&get_string, &get_char, &get_decimal,\
-	&get_pointer, &get_hexa, &get_unsigned};
+	&get_pointer, &get_pure_pointer, &get_hexa, &get_pure_hexa, &get_unsigned};
 
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
 		if (!ft_strncmp(*format, format_codes[i], ft_strlen(format_codes[i])))
 		{

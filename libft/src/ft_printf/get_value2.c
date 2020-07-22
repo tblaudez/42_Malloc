@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 11:42:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/15 11:25:00 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/22 14:53:53 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,24 @@
 #include <stdint.h>
 #include "libft.h"
 
-static int	ft_udigitcount(uintmax_t nbr, int base)
-{
-	int	digits;
-
-	if (nbr == 0)
-		return (1);
-	digits = 0;
-	while (nbr)
-	{
-		nbr /= base;
-		digits++;
-	}
-	return (digits);
-}
-
-static char	*ft_uitoabase(uintmax_t value, int base)
-{
-	char	*str;
-	int		digits_count;
-
-	digits_count = ft_udigitcount(value, base);
-	str = ft_strnew(digits_count);
-	while (digits_count--)
-	{
-		str[digits_count] = (value % base)\
-		+ (value % base > 9 ? 'a' - 10 : '0');
-		value /= base;
-	}
-	return (str);
-}
-
 void		get_pointer(va_list ap, char **output, const char *format_code)
 {
 	char	*value;
 	char	*tmp;
 
 	value = ft_strjoinfree("0x", ft_uitoabase(va_arg(ap, uintptr_t), 16), FREE_R);
+	tmp = ft_strreplaceone(*output, format_code, value);
+	free(*output);
+	free(value);
+	(*output) = tmp;
+}
+
+void		get_pure_pointer(va_list ap, char **output, const char *format_code)
+{
+	char	*value;
+	char	*tmp;
+
+	value = ft_uitoabase(va_arg(ap, uintptr_t), 16);
 	tmp = ft_strreplaceone(*output, format_code, value);
 	free(*output);
 	free(value);
@@ -80,5 +61,21 @@ void		get_hexa(va_list ap, char **output, const char *format_code)
 	tmp = ft_strreplaceone(*output, format_code, value);
 	free(*output);
 	free(value);
+	(*output) = tmp;
+}
+
+void		get_pure_hexa(va_list ap, char **output, const char *format_code)
+{
+	uint32_t	value;
+	char		*str_value;
+	char		*tmp;
+
+	value = va_arg(ap, uint32_t);
+	str_value = ft_uitoabase(value, 16);
+	if (value < 16)
+		str_value = ft_strjoinfree("0", str_value, FREE_R);
+	tmp = ft_strreplaceone(*output, format_code, str_value);
+	free(*output);
+	free(str_value);
 	(*output) = tmp;
 }

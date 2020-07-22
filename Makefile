@@ -6,7 +6,7 @@
 #    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/06 16:41:00 by tblaudez      #+#    #+#                  #
-#    Updated: 2020/07/21 10:59:40 by tblaudez      ########   odam.nl          #
+#    Updated: 2020/07/22 15:01:17 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ endif
 NAME= libft_malloc_$(HOSTTYPE).so
 LINKNAME= libft_malloc.so
 SRC= src/blocks.c src/free.c src/get_zone_size.c src/is_size.c src/malloc.c\
-src/realloc.c src/show_alloc_mem.c src/zones.c
+src/realloc.c src/show_alloc_mem.c src/show_alloc_mem_hex.c src/zones.c
 OBJ= $(SRC:%.c=%.o)
 CFLAGS= -Wall -Wextra -Werror
 INCLUDE_FILE= include/malloc.h
@@ -27,21 +27,25 @@ LIBFT= libft/libft.a
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C libft/
+	/usr/bin/make -C libft/
 
 $(NAME): $(OBJ) $(INCLUDE_FILE)
 	$(CC) $(CFLAGS) $(INCLUDE_DIR) -fPIC -shared -L libft/ -l ft $(OBJ) -o $(NAME)
-	ln -sf $(NAME) $(LINKNAME);
+	/bin/ln -sf $(NAME) $(LINKNAME);
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 
 clean:
 	/bin/rm -f $(OBJ)
-	make -C libft/ clean
+	/usr/bin/make -C libft/ clean
 
 fclean: clean
 	/bin/rm -f $(NAME) $(LINKNAME)
-	make -C libft/ fclean
+	/usr/bin/make -C libft/ fclean
+
+test: all
+	/bin/cp $(NAME) tests/$(NAME)
+	/bin/ln -sf $(NAME)  tests/$(LINKNAME)
 
 re: fclean all
 

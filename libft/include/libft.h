@@ -6,22 +6,16 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:45:47 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/15 13:20:14 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/22 14:44:54 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-/*
-** size_t
-*/
 # include <stddef.h>
-
-/*
-** va_list
-*/
 # include <stdarg.h>
+# include <stdint.h>
 
 # define FREE_L		0x01
 # define FREE_R		0x02
@@ -60,7 +54,12 @@ void		get_string(va_list ap, char **output, const char *format_code);
 void		get_char(va_list ap, char **output, const char *format_code);
 void		get_decimal(va_list ap, char **output, const char *format_code);
 void		get_pointer(va_list ap, char **output, const char *format_code);
+void		get_pure_pointer(va_list ap, char **output, const char *format_code);
 void		get_unsigned(va_list ap, char **output, const char *format_code);
 void		get_hexa(va_list ap, char **output, const char *format_code);
+void		get_pure_hexa(va_list ap, char **output, const char *format_code);
+
+int			ft_udigitcount(uintmax_t nbr, int base);
+char		*ft_uitoabase(uintmax_t value, int base);
 
 #endif

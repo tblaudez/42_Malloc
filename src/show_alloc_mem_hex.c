@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   show_alloc_mem.c                                   :+:    :+:            */
+/*   show_alloc_mem_hex.c                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/07 18:46:53 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/22 14:57:33 by tblaudez      ########   odam.nl         */
+/*   Created: 2020/07/22 14:10:03 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/22 14:59:47 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <stdint.h>
 #include "malloc.h"
 #include "libft.h"
 
-
-t_zone	*get_next_similar_zone(t_kind kind)
+static void		hexdump_memory(void *addr, uint32_t size)
 {
-	static t_zone	*zone = NULL;
-	
-	if (zone == NULL || zone->kind != kind)
-		zone = g_malloc;
-	else
-		zone = zone->next;
+	const uint8_t	*bytes = (const uint8_t*)addr;
+	uint32_t		i;
 
-	while (zone)
+	i = 0;
+	while (i < size)
 	{
-		if (zone->kind == kind)
-			return (zone);
-		zone = zone->next;
+		if (i % 16 == 0)
+		{
+			if (i != 0)
+				ft_putchar('\n');
+			ft_printf("%P ", bytes + i);;
+		}
+		ft_printf("%X ", *(bytes + i));
+		i++;
 	}
-	return (NULL);
+	ft_putchar('\n');
 }
 
-static void	show_zone(t_kind kind, const char *to_string, uint32_t *total_size)
+static void	show_zone_hex(t_kind kind, const char *to_string, uint32_t *total_size)
 {
 	t_zone	*zone;
 	t_block	*block;
@@ -51,6 +50,7 @@ static void	show_zone(t_kind kind, const char *to_string, uint32_t *total_size)
 			{
 				block_end = (void*)((char*)block->ptr + block->alloc_size);
 				ft_printf("%p - %p  : %u  bytes\n", block->ptr, block_end, block->alloc_size);
+				hexdump_memory(block->ptr, block->alloc_size);
 				(*total_size) += block->alloc_size;
 			}
 			block = block->next;
@@ -59,13 +59,13 @@ static void	show_zone(t_kind kind, const char *to_string, uint32_t *total_size)
 	}
 }
 
-void		show_alloc_mem(void)
+void		show_alloc_mem_hex(void)
 {
 	uint32_t	total_size;
 
 	total_size = 0;
-	show_zone(TINY, "TINY", &total_size);
-	show_zone(SMALL, "SMALL", &total_size);
-	show_zone(LARGE, "LARGE", &total_size);
+	show_zone_hex(TINY, "TINY", &total_size);
+	show_zone_hex(SMALL, "SMALL", &total_size);
+	show_zone_hex(LARGE, "LARGE", &total_size);
 	ft_printf("Total : %u bytes\n", total_size);
 }

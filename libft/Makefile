@@ -6,15 +6,15 @@
 #    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/06 17:45:13 by tblaudez      #+#    #+#                  #
-#    Updated: 2020/07/21 10:59:42 by tblaudez      ########   odam.nl          #
+#    Updated: 2020/07/22 15:01:20 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= libft.a
 SRC= src/ft_digitcount.c src/ft_itoabase.c src/ft_max.c src/ft_memalloc.c \
 src/ft_memcpy.c src/ft_memset.c src/ft_min.c src/ft_printf/ft_printf.c \
-src/ft_printf/get_value1.c src/ft_printf/get_value2.c src/ft_putchar.c \
-src/ft_putendl.c src/ft_putnbr.c src/ft_putstr.c \
+src/ft_printf/get_value1.c src/ft_printf/get_value2.c src/ft_printf/utils.c \
+src/ft_putchar.c src/ft_putendl.c src/ft_putnbr.c src/ft_putstr.c \
 src/ft_strcmp.c src/ft_strcpy.c src/ft_strdup.c src/ft_strjoinfree.c \
 src/ft_strlen.c src/ft_strncmp.c src/ft_strncpy.c src/ft_strndup.c \
 src/ft_strnew.c src/ft_strnjoinfree.c src/ft_strreplace.c \
