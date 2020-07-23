@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:56:56 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:06:21 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:46:49 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	*ft_memset(void *s, int c, size_t n)
 	char	*s_dup;
 
 	s_dup = (char*)s;
-	while (n--)
+	while (n)
 	{
+		n--;
 		*s_dup = (unsigned char)c;
 		s_dup++;
 	}

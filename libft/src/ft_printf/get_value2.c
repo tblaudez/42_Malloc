@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 11:42:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/22 14:53:53 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:07:11 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void		get_pointer(va_list ap, char **output, const char *format_code)
 	char	*value;
 	char	*tmp;
 
-	value = ft_strjoinfree("0x", ft_uitoabase(va_arg(ap, uintptr_t), 16), FREE_R);
+	value = ft_strjoinfree("0x", ft_uitoabase(va_arg(ap, uintptr_t), 16),\
+				FREE_R);
 	tmp = ft_strreplaceone(*output, format_code, value);
 	free(*output);
 	free(value);
@@ -56,8 +57,8 @@ void		get_hexa(va_list ap, char **output, const char *format_code)
 	char	*value;
 	char	*tmp;
 
-	value = ft_strjoinfree("0x"\
-	, ft_uitoabase(va_arg(ap, uint32_t), 16), FREE_R);
+	value = ft_strjoinfree("0x", ft_uitoabase(va_arg(ap, uint32_t), 16),\
+				FREE_R);
 	tmp = ft_strreplaceone(*output, format_code, value);
 	free(*output);
 	free(value);

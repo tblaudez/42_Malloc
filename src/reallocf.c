@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strncpy.c                                       :+:    :+:            */
+/*   reallocf.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/08 13:40:24 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/23 11:45:42 by tblaudez      ########   odam.nl         */
+/*   Created: 2020/07/23 15:03:06 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/23 15:05:25 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "malloc.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+void	*reallocf(void *ptr, size_t size)
 {
-	int i;
+	void	*ptr2;
 
-	i = 0;
-	while (src[i] && len)
-	{
-		dst[i] = src[i];
-		i++;
-		len--;
-	}
-	while (len)
-	{
-		len--;
-		dst[i] = '\0';
-	}
-	return (dst);
+	ptr2 = realloc(ptr, size);
+	if (ptr2 == NULL)
+		free(ptr);
+	return (ptr2);
 }

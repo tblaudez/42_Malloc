@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 14:42:01 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/21 13:37:00 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:34:42 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "malloc.h"
 #include "libft.h"
 
-static void		initialize_zone(t_zone *zone, size_t zone_size, const t_kind kind)
+static void		initialize_zone(t_zone *zone, size_t zone_size,\
+					const t_kind kind)
 {
 	zone->kind = kind;
 	zone->next = NULL;
@@ -47,10 +48,16 @@ static void		append_new_zone(t_zone *new)
 t_zone			*create_new_zone(size_t alloc_size, const t_kind kind)
 {
 	t_zone			*zone;
-	size_t	(*const size_function[3])(size_t size) = {&get_tiny_zone_size, &get_small_zone_size, &get_large_zone_size};
+	size_t			(*const size_function[3])(size_t size) = {\
+						&get_tiny_zone_size,\
+						&get_small_zone_size,\
+						&get_large_zone_size\
+						};
 	const size_t	zone_size = size_function[kind](alloc_size);
 
-	if ((zone = mmap(NULL, zone_size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
+	zone = mmap(NULL, zone_size, PROT_READ | PROT_WRITE,\
+				MAP_ANON | MAP_PRIVATE, -1, 0);
+	if (zone == MAP_FAILED)
 	{
 		ft_putendl("malloc() - mmap error");
 		exit(1);

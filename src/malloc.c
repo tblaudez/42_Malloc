@@ -6,14 +6,15 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 12:37:13 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/21 14:20:17 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 12:51:36 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "malloc.h"
 
-t_zone		*g_malloc = NULL;
+t_zone			*g_malloc = NULL;
+pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static t_kind	get_kind(size_t alloc_size)
 {
@@ -28,12 +29,18 @@ static t_kind	get_kind(size_t alloc_size)
 
 void			*malloc(size_t size)
 {
-	const t_kind	kind = get_kind(size);
+	t_kind				kind;
 	t_block				*block;
 
+	pthread_mutex_lock(&g_mutex);
+	kind = get_kind(size);
 	if (kind == INVALID)
+	{
+		pthread_mutex_unlock(&g_mutex);
 		return (NULL);
+	}
 	block = get_suitable_block(size, kind);
 	block->free = false;
+	pthread_mutex_unlock(&g_mutex);
 	return (block->ptr);
 }

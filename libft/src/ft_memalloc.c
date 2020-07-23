@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:55:02 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/16 11:52:26 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:16:43 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	*ft_memalloc(size_t size)
 {
 	void	*ptr;
 
-	if (!(ptr = malloc(size)))
+	ptr = malloc(size);
+	if (!ptr)
 		return (NULL);
 	ft_memset(ptr, 0, size);
 	return (ptr);

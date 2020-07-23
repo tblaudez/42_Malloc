@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strncpy.c                                       :+:    :+:            */
+/*   calloc.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
+/*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/08 13:40:24 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/23 11:45:42 by tblaudez      ########   odam.nl         */
+/*   Created: 2020/07/23 10:17:53 by tblaudez      #+#    #+#                 */
+/*   Updated: 2020/07/23 12:27:40 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "malloc.h"
 #include "libft.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+void	*calloc(size_t count, size_t size)
 {
-	int i;
+	const size_t	alloc_size = count * size;
+	void			*ptr;
 
-	i = 0;
-	while (src[i] && len)
-	{
-		dst[i] = src[i];
-		i++;
-		len--;
-	}
-	while (len)
-	{
-		len--;
-		dst[i] = '\0';
-	}
-	return (dst);
+	ptr = malloc(alloc_size);
+	if (!ptr)
+		return (NULL);
+	ft_memset(ptr, 0, alloc_size);
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 13:03:24 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/21 13:45:33 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:31:53 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ t_block			*get_suitable_block(size_t alloc_size, const t_kind kind)
 	zone = g_malloc;
 	while (zone)
 	{
-		if (zone->kind == kind && (block = find_free_block(zone, alloc_size)))
-			return (block);
+		if (zone->kind == kind)
+		{
+			block = find_free_block(zone, alloc_size);
+			if (block != NULL)
+				return (block);
+		}
 		zone = zone->next;
 	}
 	zone = create_new_zone(alloc_size, kind);

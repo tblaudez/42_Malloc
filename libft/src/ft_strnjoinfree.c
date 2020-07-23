@@ -6,15 +6,15 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/13 12:00:57 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/14 12:26:29 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:07:36 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strnjoinfree(const char *s1, const char *s2\
-, size_t size, char flags)
+char	*ft_strnjoinfree(const char *s1, const char *s2,\
+			size_t size, char flags)
 {
 	char	*new;
 

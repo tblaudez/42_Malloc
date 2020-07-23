@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 14:35:47 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/22 14:36:26 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:44:23 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ char	*ft_uitoabase(uintmax_t value, int base)
 
 	digits_count = ft_udigitcount(value, base);
 	str = ft_strnew(digits_count);
-	while (digits_count--)
+	while (digits_count)
 	{
-		str[digits_count] = (value % base)\
-		+ (value % base > 9 ? 'a' - 10 : '0');
+		digits_count--;
+		str[digits_count] = (value % base) + \
+			(value % base > 9 ? 'a' - 10 : '0');
 		value /= base;
 	}
 	return (str);

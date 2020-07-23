@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:45:47 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/22 14:44:54 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/07/23 11:03:00 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int			ft_strncmp(const char *s1, const char *s2, size_t len);
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strncpy(char *dst, const char *src, size_t len);
 char		*ft_strjoinfree(const char *s1, const char *s2, char flags);
-char		*ft_strnjoinfree(const char *s1, const char *s2\
-, size_t size, char flags);
+char		*ft_strnjoinfree(const char *s1, const char *s2,\
+				size_t size, char flags);
 char		*ft_strdup(const char *s1);
 char		*ft_strndup(const char *s1, size_t size);
 char		*ft_strreplace(char *str, const char *p1, const char *p2);
@@ -54,7 +54,8 @@ void		get_string(va_list ap, char **output, const char *format_code);
 void		get_char(va_list ap, char **output, const char *format_code);
 void		get_decimal(va_list ap, char **output, const char *format_code);
 void		get_pointer(va_list ap, char **output, const char *format_code);
-void		get_pure_pointer(va_list ap, char **output, const char *format_code);
+void		get_pure_pointer(va_list ap, char **output,\
+				const char *format_code);
 void		get_unsigned(va_list ap, char **output, const char *format_code);
 void		get_hexa(va_list ap, char **output, const char *format_code);
 void		get_pure_hexa(va_list ap, char **output, const char *format_code);
