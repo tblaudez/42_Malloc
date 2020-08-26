@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:05:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/23 11:02:30 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/08/26 11:52:36 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <pthread.h>
 
 # define ALLOC_PER_ZONE	112
-# define TINY_MAX		512
+# define TINY_MAX		1024
 # define SMALL_MAX		10240
 
 typedef enum e_kind		t_kind;
