@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/07 17:46:56 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/08/26 12:37:43 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/08/27 10:48:22 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	remove_zone_from_list(t_zone *to_delete)
 static void	start_defragmentation(t_zone *zone)
 {
 	t_block	*block;
-	
+
 	block = zone->block;
 	while (block)
 	{

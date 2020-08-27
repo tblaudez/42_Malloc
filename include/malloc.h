@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 17:05:44 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/08/26 11:52:36 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/08/27 10:11:21 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void					find_block_by_ptr(t_zone **zptr, t_block **bptr,\
 
 t_zone					*create_new_zone(size_t size, const t_kind kind);
 
-size_t					get_tiny_zone_size(size_t size);
-size_t					get_small_zone_size(size_t size);
+size_t					get_tiny_zone_size();
+size_t					get_small_zone_size();
 size_t					get_large_zone_size(size_t size);
 
 bool					is_tiny(size_t size);

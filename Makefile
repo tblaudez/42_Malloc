@@ -6,7 +6,7 @@
 #    By: tblaudez <tblaudez@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/06 16:41:00 by tblaudez      #+#    #+#                  #
-#    Updated: 2020/08/26 14:56:29 by tblaudez      ########   odam.nl          #
+#    Updated: 2020/08/27 09:53:57 by tblaudez      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LINKNAME= libft_malloc.so
 SRC= src/blocks.c src/calloc.c src/free.c src/get_zone_size.c src/is_size.c \
 src/malloc.c src/realloc.c src/show_alloc_mem.c src/zones.c src/reallocf.c
 OBJ= $(SRC:%.c=%.o)
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -g3
 INCLUDE_FILE= include/malloc.h
 INCLUDE_DIR= -I include/ -I libft/include
 LIBFT= libft/libft.a

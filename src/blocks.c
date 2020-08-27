@@ -6,7 +6,7 @@
 /*   By: tblaudez <tblaudez@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 13:03:24 by tblaudez      #+#    #+#                 */
-/*   Updated: 2020/07/23 11:31:53 by tblaudez      ########   odam.nl         */
+/*   Updated: 2020/08/27 10:48:03 by tblaudez      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,14 @@ static t_block	*trim_block(t_block *block, size_t alloc_size)
 
 static t_block	*find_free_block(t_zone *zone, size_t alloc_size)
 {
-	const size_t	needed_size = alloc_size + sizeof(t_block);
-	t_block			*block;
+	t_block	*block;
 
 	block = zone->block;
 	while (block)
 	{
-		if (block->free == true && needed_size < block->true_size)
+		if (block->free == true && alloc_size < block->true_size)
 		{
-			if (zone->kind == LARGE || (block->true_size - needed_size) < 32)
+			if (zone->kind == LARGE || (block->true_size - alloc_size) < 32)
 			{
 				block->alloc_size = alloc_size;
 				return (block);
