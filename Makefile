@@ -19,7 +19,7 @@ LINKNAME= libft_malloc.so
 SRC= src/blocks.c src/calloc.c src/free.c src/get_zone_size.c src/is_size.c \
 src/malloc.c src/realloc.c src/show_alloc_mem.c src/zones.c src/reallocf.c
 OBJ= $(SRC:%.c=%.o)
-CFLAGS= -Wall -Wextra -Werror -g3
+CFLAGS= -Wall -Wextra -Werror
 INCLUDE_FILE= include/malloc.h
 INCLUDE_DIR= -I include/ -I libft/include
 LIBFT= libft/libft.a
